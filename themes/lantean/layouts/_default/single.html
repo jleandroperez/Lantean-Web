@@ -1,0 +1,27 @@
+{{ define "main" }}
+<main id="main" class="site-main" role="main">
+  <article class="post hentry">
+    <header class="entry-header">
+      <h1 class="entry-title">{{ .Title }}</h1>
+      {{ if not .Params.no_meta }}
+      <div class="entry-meta">
+        <span class="entry-date"><time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">{{ .Date.Format "January 2, 2006" }}</time></span>
+        {{ with .Params.categories }}
+        <span class="cat-links">{{ range $i, $c := . }}{{ if $i }}, {{ end }}<a href="{{ "/categories/" | relURL }}{{ $c | urlize }}/">{{ $c }}</a>{{ end }}</span>
+        {{ end }}
+      </div>
+      {{ end }}
+    </header>
+    <div class="entry-content">{{ .Content }}</div>
+    {{ with .Params.tags }}
+    <footer class="entry-footer"><span class="tag-label">Tags:</span>{{ range . }}<a href="{{ "/tags/" | relURL }}{{ . | urlize }}/">{{ . }}</a>{{ end }}</footer>
+    {{ end }}
+  </article>
+  {{ if or .PrevInSection .NextInSection }}
+  <nav class="post-navigation">
+    {{ with .PrevInSection }}<a href="{{ .RelPermalink }}">&larr; {{ .Title }}</a>{{ end }}
+    {{ with .NextInSection }}<a href="{{ .RelPermalink }}">{{ .Title }} &rarr;</a>{{ end }}
+  </nav>
+  {{ end }}
+</main>
+{{ end }}

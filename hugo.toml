@@ -1,0 +1,26 @@
+baseURL = 'https://www.lantean.co/'
+languageCode = 'en-us'
+title = 'Lantean'
+theme = 'lantean'
+
+[pagination]
+  pagerSize = 5
+
+[params]
+  description = 'Thoughts'
+
+[markup.goldmark.renderer]
+  unsafe = true
+
+[outputs]
+  home = ['HTML', 'JSON']
+
+[menu]
+  [[menu.main]]
+    name = 'Home'
+    url = '/'
+    weight = 1
+  [[menu.main]]
+    name = 'GIT Help!'
+    url = '/git-help/'
+    weight = 2

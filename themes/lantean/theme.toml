@@ -1,0 +1,4 @@
+name = "lantean"
+license = "MIT"
+description = "Custom theme for lantean.co, inspired by WordPress Twenty Fourteen"
+min_version = "0.140.0"

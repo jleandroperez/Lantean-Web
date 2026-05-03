@@ -1,0 +1,7 @@
+{{- $lang := or .Type "objc" -}}
+{{- $code := .Inner -}}
+{{- if $code -}}
+{{ transform.Highlight $code $lang }}
+{{- else -}}
+<pre><code></code></pre>
+{{- end -}}

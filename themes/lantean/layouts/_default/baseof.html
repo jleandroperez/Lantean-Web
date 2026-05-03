@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.Language.Lang | default "en" }}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} &mdash; {{ .Site.Title }}{{ end }}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap">
+  <link rel="stylesheet" href="/css/main.css">
+</head>
+<body class="lantean">
+<div id="page" class="hfeed site">
+  <header id="site-header" role="banner">
+    <div class="header-main">
+      <h1 class="site-title"><a href="{{ "/" | relURL }}" rel="home">{{ .Site.Title }}</a></h1>
+      <button type="button" class="search-toggle" aria-controls="search-container" aria-expanded="false" aria-label="Search"><span class="screen-reader-text">Search</span></button>
+    </div>
+    <div id="search-container" class="search-box-wrapper hide">
+      <div class="search-box">
+        <input type="search" id="search-input" class="search-field" placeholder="Search&hellip;" autocomplete="off" aria-label="Search">
+      </div>
+      <div id="search-results" role="listbox"></div>
+    </div>
+  </header>
+
+  <div id="main-content" class="main-content">
+    <div id="secondary" class="primary-sidebar widget-area" role="complementary">
+      {{ with .Site.Params.description }}
+      <div class="widget widget_about">
+        <p class="site-description">{{ . }}</p>
+      </div>
+      {{ end }}
+      <nav id="primary-navigation" class="site-navigation primary-navigation" role="navigation" aria-label="Primary Menu">
+        <ul class="nav-menu">
+          {{ range .Site.Menus.main }}
+          <li><a href="{{ .URL }}">{{ .Name }}</a></li>
+          {{ end }}
+        </ul>
+      </nav>
+    </div>
+
+    <div id="primary" class="content-area">
+      {{ block "main" . }}{{ end }}
+    </div>
+  </div>
+
+  <footer id="colophon" class="site-footer" role="contentinfo">
+    <div class="site-info">
+      <a href="https://www.sfoficina.com.ar" title="SF Muebles">SF Muebles de Oficina</a>
+    </div>
+  </footer>
+</div>
+<script src="/js/fuse.min.js"></script>
+<script src="/js/search.js"></script>
+<script src="/js/lightbox.js" defer></script>
+<script>
+(function(){
+  var toggle = document.querySelector('.search-toggle');
+  var box = document.getElementById('search-container');
+  var input = document.getElementById('search-input');
+  if (!toggle || !box) return;
+  toggle.addEventListener('click', function(){
+    var on = box.classList.toggle('hide');
+    toggle.setAttribute('aria-expanded', String(!on));
+    toggle.classList.toggle('active', !on);
+    if (!on && input) setTimeout(function(){ input.focus(); }, 0);
+  });
+})();
+</script>
+</body>
+</html>

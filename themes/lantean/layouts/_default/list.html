@@ -1,0 +1,47 @@
+{{ define "main" }}
+<main id="main" class="site-main" role="main">
+  {{ if not .IsHome }}
+  <header class="archive-header"><h1 class="archive-title">{{ .Title }}</h1></header>
+  {{ end }}
+  {{ range .Paginator.Pages }}
+  <article class="post hentry">
+    <header class="entry-header">
+      <h2 class="entry-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+      <div class="entry-meta">
+        <span class="entry-date"><time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">{{ .Date.Format "January 2, 2006" }}</time></span>
+        {{ with .Params.categories }}
+        <span class="cat-links">{{ range $i, $c := . }}{{ if $i }}, {{ end }}<a href="{{ "/categories/" | relURL }}{{ $c | urlize }}/">{{ $c }}</a>{{ end }}</span>
+        {{ end }}
+      </div>
+    </header>
+    <div class="entry-content">{{ .Content }}</div>
+    {{ with .Params.tags }}
+    <footer class="entry-footer"><span class="tag-label">Tags:</span>{{ range . }}<a href="{{ "/tags/" | relURL }}{{ . | urlize }}/">{{ . }}</a>{{ end }}</footer>
+    {{ end }}
+  </article>
+  {{ end }}
+  {{ $p := .Paginator }}
+  {{ if gt $p.TotalPages 1 }}
+  {{ $cur := $p.PageNumber }}
+  {{ $total := $p.TotalPages }}
+  <nav class="paging-navigation" role="navigation" aria-label="Posts navigation">
+    <div class="loop-pagination">
+      {{ if $p.HasPrev }}<a class="page-numbers prev" href="{{ $p.Prev.URL }}" aria-label="Previous page">&larr;</a>{{ end }}
+      {{ range $p.Pagers }}
+        {{ $n := .PageNumber }}
+        {{ if or (eq $n 1) (eq $n $total) (and (ge $n (sub $cur 2)) (le $n (add $cur 2))) }}
+          {{ if eq $n $cur }}
+            <span class="page-numbers current" aria-current="page">{{ $n }}</span>
+          {{ else }}
+            <a class="page-numbers" href="{{ .URL }}">{{ $n }}</a>
+          {{ end }}
+        {{ else if or (eq $n (sub $cur 3)) (eq $n (add $cur 3)) }}
+          <span class="page-numbers dots">&hellip;</span>
+        {{ end }}
+      {{ end }}
+      {{ if $p.HasNext }}<a class="page-numbers next" href="{{ $p.Next.URL }}" aria-label="Next page">&rarr;</a>{{ end }}
+    </div>
+  </nav>
+  {{ end }}
+</main>
+{{ end }}
