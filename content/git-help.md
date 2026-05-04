@@ -6,6 +6,34 @@ build:
   list: never
 ---
 
+### Squash Branch
+
+```bash
+git reset --soft main
+git add .
+git commit . -m "..."
+git push --force-with-lease
+```
+
+### Rebase Parent
+
+```bash
+git rebase parent
+git push --force-with-lease
+```
+
+### Worktree
+
+```bash
+git worktree add ../PATH BRANCH
+```
+
+### Run Workflow
+
+```bash
+gh workflow run dependabot_pr_body.yml --ref lantean/dependabot-notice-workflow
+```
+
 ### Delete local branches with no remote
 
 ```bash
@@ -46,18 +74,6 @@ git tag -d [tag]
 git push origin :refs/tags/[tag]
 ```
 
-### Revert Last Commit
-
-```bash
-git reset --soft HEAD^
-```
-
-### Checkout 3 Rev Backwards
-
-```bash
-git checkout HEAD~3
-```
-
 ### Merge Cherry Pick from Another Remote
 
 ```bash
@@ -69,41 +85,5 @@ git cherry-pick HASH
 ### Logs between Tag + develop
 
 ```bash
-git log v0.6.1..develop
-```
-
-### Rebase Parent
-
-```bash
-git rebase parent
-git push --force-with-lease
-```
-
-### Move Pushed Commits to a New Branch
-
-```bash
-git branch their-branch main
-git reset --hard main $SHA1_OF_C
-git push --force $SHARED_REPO_REMOTE
-```
-
-### Squash Branch
-
-```bash
-git reset --soft main
-git add .
-git commit . -m "..."
-git push --force-with-lease
-```
-
-### Worktree
-
-```bash
-git worktree add ../PATH BRANCH
-```
-
-### Run Workflow
-
-```bash
-gh workflow run dependabot_pr_body.yml --ref lantean/dependabot-notice-workflow
+git log v1.0..main
 ```
