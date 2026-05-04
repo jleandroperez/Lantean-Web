@@ -72,11 +72,18 @@ git cherry-pick HASH
 git log v0.6.1..develop
 ```
 
+### Rebase Parent
+
+```bash
+git rebase parent
+git push --force-with-lease
+```
+
 ### Move Pushed Commits to a New Branch
 
 ```bash
-git branch their-branch master
-git reset --hard master $SHA1_OF_C
+git branch their-branch main
+git reset --hard main $SHA1_OF_C
 git push --force $SHARED_REPO_REMOTE
 ```
 
