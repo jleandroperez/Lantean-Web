@@ -9,7 +9,7 @@ build:
 ### Delete local branches with no remote
 
 ```bash
-git branch --merged develop | grep -Ev "(master|release|hotfix|develop)" | xargs git branch -d
+git branch --merged develop | grep -Ev "(main|release|hotfix|develop)" | xargs git branch -d
 ```
 
 ### Selective Stash
@@ -46,12 +46,6 @@ git tag -d [tag]
 git push origin :refs/tags/[tag]
 ```
 
-### Interactive Amend
-
-```bash
-git rebase -i HEAD~<N>
-```
-
 ### Revert Last Commit
 
 ```bash
@@ -84,4 +78,25 @@ git log v0.6.1..develop
 git branch their-branch master
 git reset --hard master $SHA1_OF_C
 git push --force $SHARED_REPO_REMOTE
+```
+
+### Squash Branch
+
+```bash
+git reset --soft main
+git add .
+git commit . -m "..."
+git push --force-with-lease
+```
+
+### Worktree
+
+```bash
+git worktree add ../PATH BRANCH
+```
+
+### Run Workflow
+
+```bash
+gh workflow run dependabot_pr_body.yml --ref lantean/dependabot-notice-workflow
 ```
