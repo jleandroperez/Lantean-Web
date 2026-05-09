@@ -51,6 +51,18 @@
     </div>
   </footer>
 </div>
+<div id="visitor-counter" aria-live="polite">
+  <span class="label">Visitors:</span> <span class="count">&hellip;</span>
+</div>
+<script>
+(function(){
+  var out = document.querySelector('#visitor-counter .count');
+  fetch('https://qvoicln6e5vitbt4bhbsi5ed3q0sytgm.lambda-url.us-west-2.on.aws/')
+    .then(function(r){ return r.json(); })
+    .then(function(d){ out.textContent = d.count.toLocaleString(); })
+    .catch(function(e){ out.textContent = 'err'; console.error('counter:', e); });
+})();
+</script>
 <script src="/js/fuse.min.js"></script>
 <script src="/js/search.js"></script>
 <script src="/js/lightbox.js" defer></script>
