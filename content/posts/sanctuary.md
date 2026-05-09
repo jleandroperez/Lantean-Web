@@ -5,4 +5,4 @@ slug: "sanctuary"
 issue: 3
 ---
 
-<<{ youtube sXrLsWBVIMYGMPxX }>>
+{{< youtube sXrLsWBVIMYGMPxX >}}
