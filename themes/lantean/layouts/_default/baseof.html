@@ -57,7 +57,7 @@
 <script>
 (function(){
   var out = document.querySelector('#visitor-counter .count');
-  fetch('https://qvoicln6e5vitbt4bhbsi5ed3q0sytgm.lambda-url.us-west-2.on.aws/')
+  fetch('https://lambda.lantean.co/live/stats')
     .then(function(r){ return r.json(); })
     .then(function(d){ out.textContent = d.count.toLocaleString(); })
     .catch(function(e){ out.textContent = 'err'; console.error('counter:', e); });
