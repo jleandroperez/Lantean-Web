@@ -57,9 +57,19 @@
 <script>
 (function(){
   var out = document.querySelector('#visitor-counter .count');
+  var cached = sessionStorage.getItem('lantean_count');
+
+  if (cached) {
+    out.textContent = Number(cached).toLocaleString();
+    return;
+  }
+
   fetch('https://lambda.lantean.co/live/stats')
     .then(function(r){ return r.json(); })
-    .then(function(d){ out.textContent = d.count.toLocaleString(); })
+    .then(function(d){
+      out.textContent = d.count.toLocaleString();
+      sessionStorage.setItem('lantean_count', String(d.count));
+    })
     .catch(function(e){ out.textContent = 'err'; console.error('counter:', e); });
 })();
 </script>
