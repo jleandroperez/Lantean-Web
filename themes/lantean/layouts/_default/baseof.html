@@ -51,28 +51,6 @@
     </div>
   </footer>
 </div>
-<div id="visitor-counter" aria-live="polite">
-  <span class="label">Visitors:</span> <span class="count">&hellip;</span>
-</div>
-<script>
-(function(){
-  var out = document.querySelector('#visitor-counter .count');
-  var cached = sessionStorage.getItem('lantean_count');
-
-  if (cached) {
-    out.textContent = Number(cached).toLocaleString();
-    return;
-  }
-
-  fetch('https://lambda.lantean.co/live/stats')
-    .then(function(r){ return r.json(); })
-    .then(function(d){
-      out.textContent = d.count.toLocaleString();
-      sessionStorage.setItem('lantean_count', String(d.count));
-    })
-    .catch(function(e){ out.textContent = 'err'; console.error('counter:', e); });
-})();
-</script>
 <script src="/js/fuse.min.js"></script>
 <script src="/js/search.js"></script>
 <script src="/js/lightbox.js" defer></script>
