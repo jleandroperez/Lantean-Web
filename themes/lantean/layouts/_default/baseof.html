@@ -11,6 +11,9 @@
   {{ with .OutputFormats.Get "RSS" }}
     <link rel="alternate" type="{{ .MediaType.Type }}" href="{{ .Permalink }}" title="{{ $.Site.Title }}">
   {{ end }}
+  {{ if and hugo.IsProduction .Site.Params.cloudflareAnalyticsToken }}
+    <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "{{ .Site.Params.cloudflareAnalyticsToken }}"}'></script>
+  {{ end }}
 </head>
 <body class="lantean">
 <div id="page" class="hfeed site">

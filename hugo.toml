@@ -8,6 +8,7 @@ theme = 'lantean'
 
 [params]
   description = 'Thoughts'
+  cloudflareAnalyticsToken = '6017a0051a244b35899a65d18bacbd7e'
 
 [markup.goldmark.renderer]
   unsafe = true
