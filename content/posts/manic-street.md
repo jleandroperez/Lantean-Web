@@ -5,4 +5,6 @@ slug: "manic-street"
 issue: 6
 ---
 
-https://www.youtube.com/watch?v=SSIKu2y7Wa4
+{{< youtube SSIKu2y7Wa4 >}}
+
+🤘
